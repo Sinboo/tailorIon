@@ -1,0 +1,26 @@
+/usr/local/bin/yo -> /usr/local/lib/node_modules/yo/lib/cli.js
+
+> yo@1.5.0 postinstall /usr/local/lib/node_modules/yo
+> yodoctor
+
+
+Yeoman Doctor
+Running sanity checks on your system
+
+✔ Global configuration file is valid
+✔ No .bowerrc file in home directory
+✔ NODE_PATH matches the npm root
+✖ Node.js version
+
+Your Node.js version is outdated.
+Upgrade to the latest version: https://nodejs.org
+
+✔ No .yo-rc.json file in home directory
+✔ npm version
+
+Found potential issues on your machine :(
+/usr/local/lib
+└─┬ yo@1.5.0 
+  └─┬ chalk@1.1.1
+    └── escape-string-regexp@1.0.4 
+

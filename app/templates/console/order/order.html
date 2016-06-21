@@ -1,0 +1,150 @@
+<ion-view view-title="{{!FinishFlag ? '订单-未完成' : '订单-已完成'}}" >
+  <ion-content class="has-footer">
+    <ion-refresher
+            pulling-text="下拉更新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="list card" ng-if="FinishFlag">
+      <div class="item item-stable">
+        完成订单数量
+        <span class="item-note">
+          {{orderNumber.finishOrders}}
+        </span>
+      </div>
+    </div>
+    <div class="list card" ng-if="!FinishFlag">
+      <div class="item item-stable" ng-click="toggleGroup(group)" ng-class="{active: !isGroupShown(group)}">
+        订单数量
+        <span class="item-note">
+          {{orderNumber.doingOrders}}<i class="icon" ng-class="!isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'" style="margin-left: 20px"></i>
+        </span>
+      </div>
+      <div class="item item-accordion" ng-show="!isGroupShown(group)">
+        <div class="row">
+          <div class="col colGrey">
+            代采购
+          </div>
+          <div class="col">
+            {{orderNumber.initPurchase}}
+          </div>
+          <div class="col colGrey">
+            发往工厂
+          </div>
+          <div class="col">
+            {{orderNumber.deliveredPurchase}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col colGrey">
+            待生产
+          </div>
+          <div class="col">
+            {{orderNumber.initProduce}}
+          </div>
+          <div class="col colGrey">
+            生产中
+          </div>
+          <div class="col">
+            {{orderNumber.placedProduce}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col colGrey">
+            工厂发货
+          </div>
+          <div class="col">
+            {{orderNumber.initStorage}}
+          </div>
+          <div class="col colGrey">
+            已入库
+          </div>
+          <div class="col">
+            {{orderNumber.inStorage}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col colGrey">
+            已通知
+          </div>
+          <div class="col">
+            1
+          </div>
+          <div class="col colGrey">
+            返修中
+          </div>
+          <div class="col">
+            {{'-'}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list card" ng-repeat="order in orders" ng-click="detailPage(order)" >
+      <div class="item item-divider-ios">
+        <span class="positive">待采购</span>
+      <span class="item-note">
+        <i class="icon ion-social-yen"></i>
+        {{order.price}}
+      </span>
+      </div>
+      <div class="item">
+        <div class="row">
+          <div class="col col-25 colGrey">
+            消费产品
+          </div>
+          <div class="col ">
+            {{order.consumingProduct}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col " style="color: grey">
+            购买日期
+          </div>
+          <div class="col ">
+            {{(order.purharseDate) | date: 'yyyy-MM-dd'}}
+          </div>
+          <div class="col" style="color: grey">
+            交货日期
+          </div>
+          <div class="col ">
+            {{(order.items[0].deliveryDate) | date: 'yyyy-MM-dd'}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-15" style="color: grey">
+            顾客
+          </div>
+          <div class="col col-35">
+            {{order.customerName}}
+          </div>
+          <div class="col" style="color: grey">
+            量体师
+          </div>
+          <div class="col ">
+            {{order.measurer}}
+          </div>
+        </div>
+      </div>
+
+      <div class="item " >
+        <span style="color: grey">备注:</span> {{order.remark}}
+      </div>
+
+      <div class="item" >
+        <span style="color: grey">订单号:</span> {{order.number}}
+      </div>
+    </div>
+
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                         immediate-check="false"
+                         on-infinite="loadMore()"
+                         distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
+  </div>
+
+</ion-view>

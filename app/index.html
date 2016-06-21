@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="styles/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <!-- build:js scripts/angular.js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ionic-table/ionic-table.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!-- your app's js -->
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/configuration.js"></script>
+
+    <script src="scripts/controllers/common/tailor/tailorMenu.js"></script>
+
+    <script src="scripts/controllers/console/order/orderNotComplete.js"></script>
+    <script src="scripts/controllers/console/order/detailPage.js"></script>
+    <script src="scripts/controllers/console/order/orderComplete.js"></script>
+
+    <script src="scripts/controllers/console/purchase/purchaseToBuy.js"></script>
+    <script src="scripts/controllers/console/purchase/purchaseToSend.js"></script>
+    <script src="scripts/controllers/console/purchase/purchaseOnTheWay.js"></script>
+
+    <script src="scripts/controllers/provider/stock/quickQuery.js"></script>
+    <script src="scripts/controllers/provider/stock/stockManage.js"></script>
+    <script src="scripts/controllers/provider/stock/outStock.js"></script>
+
+    <script src="scripts/controllers/other/otherNav.js"></script>
+    <script src="scripts/controllers/other/feedback.js"></script>
+
+    <script src="scripts/controllers/login/login.js"></script>
+
+
+    <script src="scripts/services/login_Register/register.js"></script>
+    <script src="scripts/services/login_Register/login.js"></script>
+    <script src="scripts/services/baseService/base.js"></script>
+    <script src="scripts/services/provider/provider.js"></script>
+    <script src="scripts/services/customShop/apply.js"></script>
+    <script src="scripts/services/customShop/customShop.js"></script>
+    <script src="scripts/services/factory/factory.js"></script>
+
+
+    <script src="scripts/services/common.js"></script>
+    <script src="scripts/services/http.js"></script>
+    <script src="scripts/services/config.js"></script>
+    <script src="scripts/services/publicFunc.js"></script>
+
+
+    <!-- endbuild -->
+  </head>
+
+  <body ng-app="tailorIon">
+
+    <ion-nav-view></ion-nav-view>
+
+    <toaster-container
+              toaster-options="{'time-out': 2000,
+                    'position-class': 'toast-top-full-width','close-button':true}"></toaster-container>
+
+  </body>
+</html>

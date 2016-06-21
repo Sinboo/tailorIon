@@ -1,0 +1,113 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+
+
+    <!--Upper TABS -->
+    <ion-tabs class="tabs-top tabs-striped " id="consoleOrder" ng-class="{'tabs-item-hide': shouldHide()}">
+      <ion-tab  title="未完成" ui-sref="tailor.consoleOrderDoing()" hidden="{{!getState('consoleOrder')}}" >
+        <ion-nav-view name="console-order-doing"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="已完成" ui-sref="tailor.consoleOrderFinish()" hidden="{{!getState('consoleOrder')}}" >
+        <ion-nav-view name="console-order-finish"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab  title="待采购" ui-sref="tailor.consolePurchaseToBuy()" hidden="{{!getState('consolePurchase')}}" >
+        <ion-nav-view name="console-purchase-toBuy"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="待发货" ui-sref="tailor.consolePurchaseToSend()" hidden="{{!getState('consolePurchase')}}" >
+        <ion-nav-view name="console-purchase-toSend"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="途中" ui-sref="tailor.consolePurchaseOnTheWay()" hidden="{{!getState('consolePurchase')}}" >
+        <ion-nav-view name="console-purchase-onWay"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab  title="快速查询" ui-sref="tailor.providerStockQuickQuery()" hidden="{{!getState('providerStock')}}" >
+        <ion-nav-view name="provider-stock-quickQuery"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="缺货" ui-sref="tailor.providerStockManage()" hidden="{{!getState('providerStock')}}" >
+        <ion-nav-view name="provider-stock-manage"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="断货" ui-sref="tailor.providerStockOutStock()" hidden="{{!getState('providerStock')}}" >
+        <ion-nav-view name="provider-stock-outStock"></ion-nav-view>
+      </ion-tab>
+    </ion-tabs>
+
+    <!--Bottom TABS -->
+    <div class="tabs tabs-icon-top" ng-show="getState('console') && !shouldHide()">
+      <a class="tab-item" ui-sref="tailor.consoleOrderDoing()"  ng-class="getClass('consoleOrder')">
+        <i class="icon ion-ios-list-outline"></i>
+        订单
+      </a>
+      <a class="tab-item" ui-sref="tailor.consolePurchaseToBuy()"  ng-class="getClass('consolePurchase')">
+        <i class="icon ion-ios-cart-outline"></i>
+        采购
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-tshirt-outline"></i>
+        生产
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-reverse-camera-outline"></i>
+        出入库
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-person-outline"></i>
+        我的
+      </a>
+    </div>
+
+    <div class="tabs tabs-icon-top" ng-show="getState('provider')">
+      <a class="tab-item" ui-sref="tailor.providerStockQuickQuery()" ng-class="getClass('providerStock')">
+        <i class="icon ion-ios-search-strong"></i>
+        库存查询
+      </a>
+      <a class="tab-item"  ng-class="getClass('providerOrder')">
+        <i class="icon ion-social-usd-outline"></i>
+        对账单
+      </a>
+    </div>
+
+    <div class="tabs tabs-icon-top" ng-show="getState('other')">
+      <a class="tab-item">
+        <i class="icon ion-ios-paper-outline"></i>
+        意见反馈
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-location-outline"></i>
+        地址
+      </a>
+    </div>
+
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">定制商</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item menu-close ui-sref="tailor.consoleOrderDoing()" >
+          工作台
+        </ion-item>
+        <ion-item menu-close ui-sref="tailor.providerStockQuickQuery()"  >
+          供应商
+        </ion-item>
+        <ion-item menu-close  >
+          其他
+        </ion-item>
+        <ion-item menu-close ng-click="logout()">
+          退出登录
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
