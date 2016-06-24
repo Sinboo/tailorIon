@@ -5,6 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('tailorIon.controllers', []);
+angular.module('tailorIon.directives', []);
+
 angular.module('gitdao', []);
 
 angular
@@ -12,7 +14,11 @@ angular
     'ionic',
     'toaster',
     'gitdao',
+    'Big',
+    'upyun',
+    'uuid',
     'tailorIon.controllers',
+    'tailorIon.directives',
     'ionic-table',
     'LocalStorageModule',
     'config'
@@ -80,12 +86,12 @@ angular
     $httpProvider.interceptors.push('myHttpInterceptor');
     $httpProvider.interceptors.push('myHttpHeader');
   })
-  // .config(['upyunProvider',function(upyunProvider) {
-  //   upyunProvider.config({
-  //     form_api_secret: 'ZeJhPE68fuX7jRkPMeFXOOyBl40=',
-  //     bucket: 'imtailor'
-  //   });
-  // }])
+  .config(['upyunProvider',function(upyunProvider) {
+    upyunProvider.config({
+      form_api_secret: 'ZeJhPE68fuX7jRkPMeFXOOyBl40=',
+      bucket: 'imtailor'
+    });
+  }])
   
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -132,11 +138,26 @@ angular
     })
     
     .state('tailor.consolePurchaseToBuy', {
-      url: '/consolePurchaseToBuy',
+      url: '/consolePurchaseToBuy/:fromBuyFabric',
       views: {
         'console-purchase-toBuy': {
           templateUrl: 'templates/console/purchase/purchaseToBuy.html',
           controller: 'PurchaseToBuyCtrl'
+        }
+      }
+    })
+    .state('tailor.buyFabric', {
+      url: '/buyFabric/:supplierName?supplierNumber?factoryName?clothingType?factoryNum?expressFeeStatus?remark?orderNumber?expressFee?fabricFee?totalPrice4CNY?totalPrice',
+      views: {
+        'console-purchase-toBuy': {
+          templateUrl: 'templates/console/purchase/buyFabric.html',
+          controller: 'BuyFabricCtrl'
+        }
+      },
+      params: {orderList: null},
+      resolve: {
+        payment: function ($stateParams, customShopService) {
+          return customShopService.payment($stateParams.supplierNumber);
         }
       }
     })

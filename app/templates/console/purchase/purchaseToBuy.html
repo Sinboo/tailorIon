@@ -6,37 +6,43 @@
     z-index: 9999999;
   }
 </style>
-<ion-view view-title="采购-待采购" >
+<ion-view  view-title="采购-待采购" >
   <ion-content class="has-footer">
+    <ion-refresher
+            pulling-text="下拉更新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
 
-  <div class="list card">
-    <div class="item item-checkbox item-button-right">
+  <div ng-repeat="fabric in fabricDList">
+  <div class="list card" ng-repeat="factory in fabric.factoryList">
+    <div class="item item-checkbox item-button-right ">
       <label class="checkbox">
         <input type="checkbox"
-               ng-model="groupe0.checked"
-               ng-checked="groupe0.checked"
-               ng-change="">
+               ng-model="groupe.D[factory]"
+               ng-checked="groupe.D[factory]"
+               ng-change="checkAll(factory)">
       </label>
-      <span class="positive">蓝领/法比亚1</span>
-      <button class="button button-light" ng-click="buyFabric()">
+      <span class="assertive">{{CLOTHING_TYPE['D']}}</span>
+      <span class="positive">{{fabric.orderList[factory][0].orderItem.factoryName}}/{{fabric.supplierName}}</span>
+      <button class="button button-light" ng-click="buyFabric(fabricDList, fabric, factory, 'D')" >
         购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
       </button>
     </div>
 
-    <div class="item">
-      <ion-checkbox ng-model="filter.blue" style="background-color: #f5f5f5;">
+    <div class="item" ng-repeat="order in fabric.orderList[factory]">
+      <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
         <div class="row">
           <div class="col" style="color: grey">
             加工厂:
           </div>
           <div class="col ">
-            蓝领
+            {{fabric.orderList[factory][0].orderItem.factoryName}}
           </div>
           <div class="col" style="color: grey">
             顾客:
           </div>
           <div class="col ">
-            王珊珊
+            {{order.orderItem.customerName}}
           </div>
         </div>
         <div class="row">
@@ -44,196 +50,121 @@
             货号/色号:
           </div>
           <div class="col ">
-            787967
+            {{order.productNumber}}/{{order.color}}
           </div>
           <div class="col" style="color: grey">
-            数量:
+            数量({{FABRIC_UNIT[fabric.orderList[factory][0].unit]}}):
           </div>
           <div class="col ">
-            329 米
+            {{order.unit == 'METER' ? order.quantity : order.quantity4yard}}
           </div>
         </div>
       </ion-checkbox>
     </div>
   </div>
-
-  <div class="list card">
-    <div class="item item-checkbox item-button-right">
-      <label class="checkbox">
-        <input type="checkbox"
-               ng-model="groupe0.checked"
-               ng-checked="groupe0.checked"
-               ng-change="">
-      </label>
-      <span class="positive">蓝领/法比亚1</span>
-      <button class="button button-light" ng-click="buyFabric()">
-        购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
-      </button>
-    </div>
-
-    <div class="item">
-      <ion-checkbox ng-model="filter.blue" style="background-color: #f5f5f5;">
-        <div class="row">
-          <div class="col" style="color: grey">
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col" style="color: grey">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col" style="color: grey">
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </ion-checkbox>
-    </div>
-
-    <div class="item">
-      <ion-checkbox ng-model="filter.blue" style="background-color: #f5f5f5;">
-        <div class="row">
-          <div class="col" style="color: grey">
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col" style="color: grey">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col" style="color: grey">
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </ion-checkbox>
-    </div>
   </div>
 
-  <div class="list card">
-    <div class="item item-checkbox item-button-right">
-      <label class="checkbox">
-        <input type="checkbox"
-               ng-model="groupe0.checked"
-               ng-checked="groupe0.checked"
-               ng-change="">
-      </label>
-      <span class="positive">蓝领/法比亚1</span>
-      <button class="button button-light" ng-click="buyFabric()">
-        购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
-      </button>
+    <div ng-repeat="fabric in fabricAList">
+      <div class="list card" ng-repeat="factory in fabric.factoryList">
+        <div class="item item-checkbox item-button-right ">
+          <label class="checkbox">
+            <input type="checkbox"
+                   ng-model="groupe.A[factory]"
+                   ng-checked="groupe.A[factory]"
+                   ng-change="checkAll(factory)">
+          </label>
+          <span class="assertive">{{CLOTHING_TYPE['A']}}</span>
+          <span class="positive">{{fabric.orderList[factory][0].orderItem.factoryName}}/{{fabric.supplierName}}</span>
+          <button class="button button-light" ng-click="buyFabric(fabricAList, fabric, factory, 'A')">
+            购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="item" ng-repeat="order in fabric.orderList[factory]">
+          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
+            <div class="row">
+              <div class="col" style="color: grey">
+                加工厂:
+              </div>
+              <div class="col ">
+                {{fabric.orderList[factory][0].orderItem.factoryName}}
+              </div>
+              <div class="col" style="color: grey">
+                顾客:
+              </div>
+              <div class="col ">
+                {{order.orderItem.customerName}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" style="color: grey">
+                货号/色号:
+              </div>
+              <div class="col ">
+                {{order.productNumber}}/{{order.color}}
+              </div>
+              <div class="col" style="color: grey">
+                数量({{FABRIC_UNIT[fabric.orderList[factory][0].unit]}}):
+              </div>
+              <div class="col ">
+                {{order.unit == 'METER' ? order.quantity : order.quantity4yard}}
+              </div>
+            </div>
+          </ion-checkbox>
+        </div>
+      </div>
     </div>
 
-    <div class="item">
-      <ion-checkbox ng-model="filter.blue" style="background-color: #f5f5f5;">
-        <div class="row">
-          <div class="col" style="color: grey">
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col" style="color: grey">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
+    <div ng-repeat="fabric in fabricOtherList">
+      <div class="list card" ng-repeat="factory in fabric.factoryList">
+        <div class="item item-checkbox item-button-right ">
+          <label class="checkbox">
+            <input type="checkbox"
+                   ng-model="groupe.Other[factory]"
+                   ng-checked="groupe.Other[factory]"
+                   ng-change="checkAll(factory)">
+          </label>
+          <span class="assertive">{{CLOTHING_TYPE['OTHER']}}</span>
+          <span class="positive">{{fabric.orderList[factory][0].orderItem.factoryName}}/{{fabric.supplierName}}</span>
+          <button class="button button-light" ng-click="buyFabric(fabricOtherList, fabric, factory, 'OTHER')">
+            购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
+          </button>
         </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col" style="color: grey">
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </ion-checkbox>
-    </div>
-  </div>
 
-  <div class="list card">
-    <div class="item item-checkbox item-button-right">
-      <label class="checkbox">
-        <input type="checkbox"
-               ng-model="groupe0.checked"
-               ng-checked="groupe0.checked"
-               ng-change="">
-      </label>
-      <span class="positive">蓝领/法比亚1</span>
-      <button class="button button-light" ng-click="buyFabric()">
-        购买&nbsp;<i class="icon ion-ios-arrow-right"></i>
-      </button>
-    </div>
-
-    <div class="item">
-      <ion-checkbox ng-model="filter.blue" style="background-color: #f5f5f5;">
-        <div class="row">
-          <div class="col" style="color: grey">
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col" style="color: grey">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
+        <div class="item" ng-repeat="order in fabric.orderList[factory]">
+          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
+            <div class="row">
+              <div class="col" style="color: grey">
+                加工厂:
+              </div>
+              <div class="col ">
+                {{fabric.orderList[factory][0].orderItem.factoryName}}
+              </div>
+              <div class="col" style="color: grey">
+                顾客:
+              </div>
+              <div class="col ">
+                {{order.orderItem.customerName}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" style="color: grey">
+                货号/色号:
+              </div>
+              <div class="col ">
+                {{order.productNumber}}/{{order.color}}
+              </div>
+              <div class="col" style="color: grey">
+                数量({{FABRIC_UNIT[fabric.orderList[factory][0].unit]}}):
+              </div>
+              <div class="col ">
+                {{order.unit == 'METER' ? order.quantity : order.quantity4yard}}
+              </div>
+            </div>
+          </ion-checkbox>
         </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col" style="color: grey">
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </ion-checkbox>
+      </div>
     </div>
-  </div>
-
   </ion-content>
   <div class="bar bar-footer">
     <div class="title"></div>

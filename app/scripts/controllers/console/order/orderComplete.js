@@ -64,8 +64,8 @@ angular.module('tailorIon.controllers')
       pageIndex = 0;
       $scope.getOrders(0);
       pageIndex = pageIndex + 1;
+      $scope.noMoreItemsAvailable = false;
     };
-
 
     $scope.toggleGroup = function(group) {
       if ($scope.isGroupShown(group)) {

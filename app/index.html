@@ -38,6 +38,11 @@
     <script src="bower_components/ionic-table/ionic-table.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/js-base64/base64.js"></script>
+    <script src="bower_components/js-md5/js/md5.js"></script>
+    <script src="bower_components/upyun/dist/upyun.min.js"></script>
+    <script src="bower_components/angular-uuid-service/angular-uuid-service.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -46,6 +51,11 @@
 
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
+    <!-- customer added -->
+    <script src="scripts/lib/big.js" ></script>
+    <script src="scripts/lib/angular-big.js" ></script>
+    <!-- end customer added -->
+
     <script src="scripts/app.js"></script>
     <script src="scripts/configuration.js"></script>
 
@@ -58,6 +68,7 @@
     <script src="scripts/controllers/console/purchase/purchaseToBuy.js"></script>
     <script src="scripts/controllers/console/purchase/purchaseToSend.js"></script>
     <script src="scripts/controllers/console/purchase/purchaseOnTheWay.js"></script>
+    <script src="scripts/controllers/console/purchase/buyFabric.js"></script>
 
     <script src="scripts/controllers/provider/stock/quickQuery.js"></script>
     <script src="scripts/controllers/provider/stock/stockManage.js"></script>
@@ -83,6 +94,7 @@
     <script src="scripts/services/config.js"></script>
     <script src="scripts/services/publicFunc.js"></script>
 
+    <script src="scripts/directive/getItemHeight.js"></script>
 
     <!-- endbuild -->
   </head>
@@ -93,7 +105,7 @@
 
     <toaster-container
               toaster-options="{'time-out': 2000,
-                    'position-class': 'toast-top-full-width','close-button':true}"></toaster-container>
+                    'position-class': 'toast-top-full-width','close-button':false}"></toaster-container>
 
   </body>
 </html>

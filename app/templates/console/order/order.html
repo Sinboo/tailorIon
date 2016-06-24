@@ -80,13 +80,15 @@
       </div>
     </div>
 
-    <div class="list card" ng-repeat="order in orders" ng-click="detailPage(order)" >
-      <div class="item item-divider-ios">
+    <div class="card"
+         ng-repeat="order in orders"
+         ng-click="detailPage(order)" >
+      <div class="item">
         <span class="positive">待采购</span>
-      <span class="item-note">
-        <i class="icon ion-social-yen"></i>
-        {{order.price}}
-      </span>
+        <span class="item-note">
+          <i class="icon ion-social-yen"></i>
+          {{order.price}}
+        </span>
       </div>
       <div class="item">
         <div class="row">
@@ -132,7 +134,7 @@
         <span style="color: grey">备注:</span> {{order.remark}}
       </div>
 
-      <div class="item" >
+      <div class="item">
         <span style="color: grey">订单号:</span> {{order.number}}
       </div>
     </div>

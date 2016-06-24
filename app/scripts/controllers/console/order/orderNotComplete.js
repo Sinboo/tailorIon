@@ -36,6 +36,9 @@ angular.module('tailorIon.controllers')
             order.consumingProduct = consumingProduct.substring(1, consumingProduct.length);
           });
           $scope.orders = $scope.orders.concat(newOrders);
+          angular.forEach($scope.orders, function (item) {
+            item.containerHeight = 0;
+          })
           if ( data.data.last == true ) {
             $scope.noMoreItemsAvailable = true;
             toaster.pop('warning', '最后一屏数据');
@@ -63,10 +66,10 @@ angular.module('tailorIon.controllers')
       pageIndex = 0;
       $scope.getOrders(0);
       pageIndex = pageIndex + 1;
+      $scope.noMoreItemsAvailable = false;
     };
     
     $scope.detailPage = function (order) {
-      console.log('yes');
       $state.go('tailor.detailPage')
     }
 
@@ -81,5 +84,6 @@ angular.module('tailorIon.controllers')
     $scope.isGroupShown = function(group) {
       return $scope.shownGroup === group;
     };
+
 
 	});

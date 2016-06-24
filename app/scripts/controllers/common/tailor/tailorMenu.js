@@ -18,7 +18,7 @@ angular.module('tailorIon.controllers')
       switch ($state.current.name) {
         case 'tailor.detailPage':
           return true;
-        case 'statename2':
+        case 'tailor.buyFabric':
           return true;
         default:
           return false;

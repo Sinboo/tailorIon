@@ -8,25 +8,30 @@
 </style>
 <ion-view view-title="采购-待发货" >
   <ion-content class="has-footer">
-  <div class="list card">
+    <ion-refresher
+            pulling-text="下拉更新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+
+  <div class="list card" ng-repeat="order in orders">
     <div class="item">
-      <span class="positive">AAAF/法比亚1</span>
+      <span class="positive">{{order.items[0].orderItem.factoryName}}/{{order.shopName}}</span>
     </div>
 
-    <div class="item">
+    <div class="item" ng-repeat="item in order.items">
       <div class="itemRow">
         <div class="row">
           <div class="col colGrey " >
             加工厂:
           </div>
           <div class="col ">
-            蓝领
+            {{item.orderItem.factoryName}}
           </div>
           <div class="col colGrey ">
             顾客:
           </div>
           <div class="col ">
-            王珊珊
+            {{item.orderItem.customerName}}
           </div>
         </div>
         <div class="row">
@@ -34,203 +39,24 @@
             货号/色号:
           </div>
           <div class="col ">
-            787967
+            {{item.productNumber}}/{{item.color}}
           </div>
           <div class="col colGrey " >
-            数量:
+            数量({{FABRIC_UNIT[item.unit]}}):
           </div>
           <div class="col ">
-            329 米
-          </div>
-        </div>
-      </div>
-      </div>
-
-
-    <div class="item">
-      <div class="itemRow">
-        <div class="row">
-          <div class="col colGrey " >
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col colGrey ">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col colGrey ">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col colGrey " >
-            数量:
-          </div>
-          <div class="col ">
-            329 米
+            {{item.quantity}}
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
-  <div class="list card">
-    <div class="item ">
-      <span class="positive">AAAF/法比亚1</span>
-    </div>
-
-    <div class="item">
-      <div class="itemRow">
-        <div class="row">
-          <div class="col colGrey " >
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col colGrey ">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col colGrey ">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col colGrey " >
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="item">
-      <div class="itemRow">
-        <div class="row">
-          <div class="col colGrey " >
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col colGrey ">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col colGrey ">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col colGrey " >
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="list card">
-    <div class="item ">
-      <span class="positive">AAAF/法比亚1</span>
-    </div>
-
-    <div class="item">
-      <div class="itemRow">
-        <div class="row">
-          <div class="col colGrey " >
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col colGrey ">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col colGrey ">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col colGrey " >
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="item">
-      <div class="itemRow">
-        <div class="row">
-          <div class="col colGrey " >
-            加工厂:
-          </div>
-          <div class="col ">
-            蓝领
-          </div>
-          <div class="col colGrey ">
-            顾客:
-          </div>
-          <div class="col ">
-            王珊珊
-          </div>
-        </div>
-        <div class="row">
-          <div class="col colGrey ">
-            货号/色号:
-          </div>
-          <div class="col ">
-            787967
-          </div>
-          <div class="col colGrey " >
-            数量:
-          </div>
-          <div class="col ">
-            329 米
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                         immediate-check="false"
+                         on-infinite="loadMore()"
+                         distance="1%">
+    </ion-infinite-scroll>
 
   </ion-content>
   <div class="bar bar-footer">
