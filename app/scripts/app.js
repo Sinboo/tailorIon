@@ -17,6 +17,9 @@ angular
     'Big',
     'upyun',
     'uuid',
+    'ionic.ui.modalService',
+    'ionic-datepicker',
+    'ionic-modal-select',
     'tailorIon.controllers',
     'tailorIon.directives',
     'ionic-table',
@@ -79,6 +82,25 @@ angular
   loginService.initUser()
 
 })
+  .config(function (ionicDatePickerProvider) {
+    var datePickerObj = {
+      inputDate: new Date(),
+      setLabel: '确定',
+      todayLabel: '今天',
+      closeLabel: '关闭',
+      mondayFirst: false,
+      weeksList: ["日", "一", "二", "三", "四", "五", "六"],
+      monthsList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+      templateType: 'popup',
+      from: new Date(2012, 8, 1),
+      to: new Date(2018, 8, 1),
+      showTodayButton: true,
+      dateFormat: 'yyyy MM dd',
+      closeOnSelect: false,
+      disableWeekdays: [0]
+    };
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
+  })
   .config(function (localStorageServiceProvider, $httpProvider) {
     localStorageServiceProvider
       .setPrefix('tailorIon');
@@ -179,6 +201,27 @@ angular
         }
       }
     })
+
+    .state('tailor.consoleProduceToOrder', {
+      url: '/consoleProduceToOrder',
+      views: {
+        'console-produce-toOrder': {
+          templateUrl: 'templates/console/produce/produceToOrder.html',
+          controller: 'ProduceToOrderCtrl'
+        }
+      }
+    })
+    .state('tailor.consoleProduceUnderDoing', {
+      url: '/consoleProduceUnderDoing',
+      views: {
+        'console-produce-underDoing': {
+          templateUrl: 'templates/console/produce/produceUnderDoing.html',
+          controller: 'ProduceUnderDoingCtrl'
+        }
+      }
+    })
+    
+    
     
     .state('tailor.providerStockQuickQuery', {
       url: '/providerStockQuickQuery',

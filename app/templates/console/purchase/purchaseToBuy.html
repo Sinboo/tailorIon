@@ -29,8 +29,10 @@
       </button>
     </div>
 
-    <div class="item" ng-repeat="order in fabric.orderList[factory]">
-      <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
+    <div class="item">
+      <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)"
+                    ng-repeat="order in fabric.orderList[factory]"
+                    style="background-color: #f5f5f5;">
         <div class="row">
           <div class="col" style="color: grey">
             加工厂:
@@ -80,8 +82,10 @@
           </button>
         </div>
 
-        <div class="item" ng-repeat="order in fabric.orderList[factory]">
-          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
+        <div class="item" >
+          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)"
+                        ng-repeat="order in fabric.orderList[factory]"
+                        style="background-color: #f5f5f5;">
             <div class="row">
               <div class="col" style="color: grey">
                 加工厂:
@@ -131,8 +135,10 @@
           </button>
         </div>
 
-        <div class="item" ng-repeat="order in fabric.orderList[factory]">
-          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)" style="background-color: #f5f5f5;">
+        <div class="item" >
+          <ion-checkbox ng-model="order.checked" ng-checked="order.checked" ng-change="itemCheck(order)"
+                        ng-repeat="order in fabric.orderList[factory]"
+                        style="background-color: #f5f5f5;">
             <div class="row">
               <div class="col" style="color: grey">
                 加工厂:

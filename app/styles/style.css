@@ -32,3 +32,9 @@
   margin: 50px auto;
   display: block;
 }
+
+.col {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
