@@ -60,6 +60,15 @@
       <ion-tab  title="我的对账单" ui-sref="tailor.providerOrderList()" hidden="true" >
         <ion-nav-view name="provider-order-list"></ion-nav-view>
       </ion-tab>
+
+      <ion-tab  title="意见反馈" ui-sref="tailor.otherFeedback()" hidden="true" >
+        <ion-nav-view name="other-feedback"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab  title="供应商地址" ui-sref="tailor.otherPositionManage()" hidden="true" >
+        <ion-nav-view name="other-position"></ion-nav-view>
+      </ion-tab>
+
     </ion-tabs>
 
 
@@ -102,11 +111,11 @@
 
 
     <div class="tabs tabs-icon-top" ng-show="getState('other')">
-      <a class="tab-item">
+      <a class="tab-item" ui-sref="tailor.otherFeedback()" ng-class="getClass('otherFeedback')">
         <i class="icon ion-ios-paper-outline"></i>
         意见反馈
       </a>
-      <a class="tab-item">
+      <a class="tab-item" ui-sref="tailor.otherPositionManage()" ng-class="getClass('otherPositionManage')">
         <i class="icon ion-ios-location-outline"></i>
         地址
       </a>
@@ -126,7 +135,7 @@
         <ion-item menu-close ui-sref="tailor.providerStockQuickQuery()"  >
           供应商
         </ion-item>
-        <ion-item menu-close  >
+        <ion-item menu-close ui-sref="tailor.otherFeedback()">
           其他
         </ion-item>
         <ion-item menu-close ng-click="logout()">

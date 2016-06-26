@@ -298,6 +298,27 @@ angular
       }
     })
 
+    .state('tailor.otherFeedback', {
+      url: '/otherFeedback',
+      views: {
+        'other-feedback': {
+          templateUrl: 'templates/other/feedback.html',
+          controller: 'FeedbackCtrl'
+        }
+      }
+    })
+
+    .state('tailor.otherPositionManage', {
+      url: '/otherPositionManage',
+      views: {
+        'other-position': {
+          templateUrl: 'templates/other/positionManage.html',
+          controller: 'PositionManageCtrl'
+        }
+      }
+    })
+    
+
 
 
 

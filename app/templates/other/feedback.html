@@ -1,137 +1,20 @@
-<div class="content" style="padding-bottom: 60px;padding-top: 30px">
-  <div class="list card">
-
-    <div class="item item-avatar">
-      <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-      <h2>Marty McFly</h2>
-      <p>November 05, 1955</p>
+<ion-view view-title="意见反馈">
+  <ion-content class="has-footer" >
+    <div class="list card">
+      <div class="itemRow" style="margin: 10px;color: grey;background-color: white">
+        请填写反馈意见:
+      </div>
+      <label class="item item-input" style="height: 300px">
+        <textarea class="panel-bug-textarea" placeholder="请填写反馈意见..." style="height: 300px"> </textarea>
+      </label>
     </div>
-
-    <div class="item item-body">
-      <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-      <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-      </p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="submitFeedback(formData)">
+        提交意见
+      </button>
     </div>
-
-    <div class="item tabs tabs-secondary tabs-icon-left">
-      <a class="tab-item" href="#">
-        <i class="icon ion-thumbsup"></i>
-        Like
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-chatbox"></i>
-        Comment
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
-      </a>
-    </div>
-
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
   </div>
-  <div class="list card">
-
-    <div class="item item-avatar">
-      <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-      <h2>Marty McFly</h2>
-      <p>November 05, 1955</p>
-    </div>
-
-    <div class="item item-body">
-      <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-      <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-      </p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-    <div class="item tabs tabs-secondary tabs-icon-left">
-      <a class="tab-item" href="#">
-        <i class="icon ion-thumbsup"></i>
-        Like
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-chatbox"></i>
-        Comment
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
-      </a>
-    </div>
-
-  </div>
-
-  <div class="list card">
-
-    <div class="item item-avatar">
-      <img src="mcfly.jpg">
-      <h2>Marty McFly</h2>
-      <p>November 05, 1955</p>
-    </div>
-
-    <div class="item item-body">
-      <img class="full-image" src="delorean.jpg">
-      <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-      </p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-  </div>
-
-  <div class="list card">
-
-    <div class="item item-avatar">
-      <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-      <h2>Marty McFly</h2>
-      <p>November 05, 1955</p>
-    </div>
-
-    <div class="item item-body">
-      <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-      <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-      </p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-    <div class="item tabs tabs-secondary tabs-icon-left">
-      <a class="tab-item" href="#">
-        <i class="icon ion-thumbsup"></i>
-        Like
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-chatbox"></i>
-        Comment
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
-      </a>
-    </div>
-
-  </div>
-</div>
+</ion-view>

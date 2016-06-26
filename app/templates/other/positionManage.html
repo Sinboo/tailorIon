@@ -1,0 +1,75 @@
+<ion-view view-title="供应商地址">
+  <ion-content class="has-footer">
+    <ion-refresher
+      pulling-text="下拉更新..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="list">
+      <a class="item item-button-right" href="" modal-select="" ng-model="providerType" options="providerTypes" ng-change="setProviderType(providerType)"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择类型">
+        <span style="color: grey">选择类型</span>
+        <div class="option">
+          {{option.fullName}}
+        </div>
+        <button class="button button-light" style="font-size: small; color: grey">
+          {{providerType.fullName}}&nbsp;
+          <i class="icon ion-ios-arrow-right"></i>
+        </button>
+      </a>
+    </div>
+
+    <div class="card" ng-repeat="provider in providers">
+      <div class="item">
+        <span class="positive">{{providerType.fullName}}</span>
+        <span class="item-note">
+          {{$index + 1}}
+        </span>
+      </div>
+      <div class="item">
+        <div class="itemRow">
+          <div class="row">
+            <div class="col col-25 colGrey">
+              单位名称
+            </div>
+            <div class="col ">
+              {{provider.fullName}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col " style="color: grey">
+              联系人
+            </div>
+            <div class="col ">
+              {{provider.contact}}
+            </div>
+            <div class="col" style="color: grey">
+              电话
+            </div>
+            <div class="col ">
+              {{provider.phone}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item " >
+        <span style="color: grey">区域具体地址:</span> {{provider.fullAddress}}
+      </div>
+
+      <div class="item">
+        <span style="color: grey">邮编:</span> {{provider.zip}}
+      </div>
+    </div>
+
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                         immediate-check="false"
+                         on-infinite="loadMore()"
+                         distance="11%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
+  </div>
+</ion-view>
