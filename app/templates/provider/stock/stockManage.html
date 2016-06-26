@@ -1,221 +1,64 @@
-<ion-view view-title="库存查询-缺货" >
-  <ion-content class="has-footer">
-    <div class="list list-inset">
-      <div class="item ">
-        <span class="positive">待采购</span>
-      <span class="item-note">
-        <i class="icon ion-social-yen"></i>
-        3000
-      </span>
+<ion-view view-title="缺货" >
+  <ion-content class="has-footer" style="margin-top: 10px">
+    <div class="list">
+      <a class="item item-button-right" href="" modal-select="" ng-model="fabric" options="fabrics" ng-change="setFabric(fabric)"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择供应商">
+        <span style="color: grey">供应商</span>
+        <div class="option">
+          {{option.shortName}}
+        </div>
+        <button class="button button-light" style="font-size: small; color: grey">
+          {{fabric.shortName}}&nbsp;
+          <i class="icon ion-ios-arrow-right"></i>
+        </button>
+      </a>
+      <div class="itemRow" style="margin: 10px;color: grey">
+        以下是所有暂时缺货的产品，请留意，近期不要订购，如果补货完毕会及时更新.
       </div>
-      <div class="item">
-        <div class="row">
-          <div class="col" style="color: grey">
-            消费产品
-          </div>
-          <div class="col ">
-            1套装A,C + 2套装B,D,A + 3套装 A, B
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            购买日期
-          </div>
-          <div class="col ">
-            2016-03-18
-          </div>
-          <div class="col" style="color: grey">
-            交货日期
-          </div>
-          <div class="col ">
-            2016-05-18
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col" style="color: grey">
-            顾客
-          </div>
-          <div class="col ">
-            张三
-          </div>
-          <div class="col" style="color: grey">
-            量体师
-          </div>
-          <div class="col ">
-            李四
-          </div>
-        </div>
-      </div>
-
+    </div>
+    <div class="list card" style="text-align: center">
       <div class="item" >
-        <span style="color: grey">订单号:</span> AA123455DFDF
-      </div>
+        <div class="row">
+          <div class="col">
+            序号
+          </div>
+          <div class="col ">
+            货号
+          </div>
+          <div class="col ">
+            色号
+          </div>
+          <div class="col ">
+            料册
+          </div>
+          <div class="col col-33">
+            预计到货
+          </div>
+        </div>
 
+        <div class="itemRow">
+          <div class="row" style="margin-bottom: 2px; font-size: smaller" ng-repeat="item in items">
+            <div class="col ">
+              {{$index+1}}
+            </div>
+            <div class="col ">
+              {{item.productNumber}}
+            </div>
+            <div class="col ">
+              {{item.color}}
+            </div>
+            <div class="col ">
+              {{item.book}}
+            </div>
+            <div class="col col-33 positive">
+              {{item.deliveryDateFormatStr}}
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-
-    <div class="list list-inset">
-      <div class="item ">
-        <span class="positive">待采购</span>
-      <span class="item-note">
-        <i class="icon ion-social-yen"></i>
-        3000
-      </span>
-      </div>
-      <div class="item">
-        <div class="row">
-          <div class="col" style="color: grey">
-            消费产品
-          </div>
-          <div class="col ">
-            1套装A,C + 2套装B,D,A + 3套装 A, B
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            购买日期
-          </div>
-          <div class="col ">
-            2016-03-18
-          </div>
-          <div class="col" style="color: grey">
-            交货日期
-          </div>
-          <div class="col ">
-            2016-05-18
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col" style="color: grey">
-            顾客
-          </div>
-          <div class="col ">
-            张三
-          </div>
-          <div class="col" style="color: grey">
-            量体师
-          </div>
-          <div class="col ">
-            李四
-          </div>
-        </div>
-      </div>
-
-      <div class="item" >
-        <span style="color: grey">订单号:</span> AA123455DFDF
-      </div>
-
-    </div>
-
-    <div class="list list-inset">
-      <div class="item ">
-        <span class="positive">待采购</span>
-      <span class="item-note">
-        <i class="icon ion-social-yen"></i>
-        3000
-      </span>
-      </div>
-      <div class="item">
-        <div class="row">
-          <div class="col" style="color: grey">
-            消费产品
-          </div>
-          <div class="col ">
-            1套装A,C + 2套装B,D,A + 3套装 A, B
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            购买日期
-          </div>
-          <div class="col ">
-            2016-03-18
-          </div>
-          <div class="col" style="color: grey">
-            交货日期
-          </div>
-          <div class="col ">
-            2016-05-18
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col" style="color: grey">
-            顾客
-          </div>
-          <div class="col ">
-            张三
-          </div>
-          <div class="col" style="color: grey">
-            量体师
-          </div>
-          <div class="col ">
-            李四
-          </div>
-        </div>
-      </div>
-
-      <div class="item" >
-        <span style="color: grey">订单号:</span> AA123455DFDF
-      </div>
-
-    </div>
-
-    <div class="list list-inset">
-      <div class="item ">
-        <span class="positive">待采购</span>
-      <span class="item-note">
-        <i class="icon ion-social-yen"></i>
-        3000
-      </span>
-      </div>
-      <div class="item">
-        <div class="row">
-          <div class="col" style="color: grey">
-            消费产品
-          </div>
-          <div class="col ">
-            1套装A,C + 2套装B,D,A + 3套装 A, B
-          </div>
-        </div>
-        <div class="row">
-          <div class="col" style="color: grey">
-            购买日期
-          </div>
-          <div class="col ">
-            2016-03-18
-          </div>
-          <div class="col" style="color: grey">
-            交货日期
-          </div>
-          <div class="col ">
-            2016-05-18
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col" style="color: grey">
-            顾客
-          </div>
-          <div class="col ">
-            张三
-          </div>
-          <div class="col" style="color: grey">
-            量体师
-          </div>
-          <div class="col ">
-            李四
-          </div>
-        </div>
-      </div>
-
-      <div class="item" >
-        <span style="color: grey">订单号:</span> AA123455DFDF
-      </div>
-
-    </div>
 
   </ion-content>
   <div class="bar bar-footer">

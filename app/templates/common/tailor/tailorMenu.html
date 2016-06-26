@@ -37,8 +37,15 @@
         <ion-nav-view name="console-produce-underDoing"></ion-nav-view>
       </ion-tab>
 
-
-
+      <ion-tab  title="待入库" ui-sref="tailor.consoleStorageToAdd()" hidden="{{!getState('consoleStorage')}}" >
+        <ion-nav-view name="console-storage-toAdd"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="入库未通知" ui-sref="tailor.consoleStorageNotNotified()" hidden="{{!getState('consoleStorage')}}" >
+        <ion-nav-view name="console-storage-notNotified"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="已通知" ui-sref="tailor.consoleStorageNotified()" hidden="{{!getState('consoleStorage')}}" >
+        <ion-nav-view name="console-storage-notified"></ion-nav-view>
+      </ion-tab>
 
       <ion-tab  title="快速查询" ui-sref="tailor.providerStockQuickQuery()" hidden="{{!getState('providerStock')}}" >
         <ion-nav-view name="provider-stock-quickQuery"></ion-nav-view>
@@ -49,7 +56,13 @@
       <ion-tab  title="断货" ui-sref="tailor.providerStockOutStock()" hidden="{{!getState('providerStock')}}" >
         <ion-nav-view name="provider-stock-outStock"></ion-nav-view>
       </ion-tab>
+
+      <ion-tab  title="我的对账单" ui-sref="tailor.providerOrderList()" hidden="true" >
+        <ion-nav-view name="provider-order-list"></ion-nav-view>
+      </ion-tab>
     </ion-tabs>
+
+
 
     <!--Bottom TABS -->
     <div class="tabs tabs-icon-top" ng-show="getState('console') && !shouldHide()">
@@ -65,26 +78,28 @@
         <i class="icon ion-tshirt-outline"></i>
         生产
       </a>
-      <a class="tab-item">
+      <a class="tab-item" ui-sref="tailor.consoleStorageToAdd()" ng-class="getClass('consoleStorage')">
         <i class="icon ion-ios-reverse-camera-outline"></i>
         出入库
       </a>
-      <a class="tab-item">
-        <i class="icon ion-ios-person-outline"></i>
-        我的
-      </a>
+      <!--<a class="tab-item">-->
+        <!--<i class="icon ion-ios-person-outline"></i>-->
+        <!--我的-->
+      <!--</a>-->
     </div>
+
 
     <div class="tabs tabs-icon-top" ng-show="getState('provider')">
       <a class="tab-item" ui-sref="tailor.providerStockQuickQuery()" ng-class="getClass('providerStock')">
         <i class="icon ion-ios-search-strong"></i>
         库存查询
       </a>
-      <a class="tab-item"  ng-class="getClass('providerOrder')">
+      <a class="tab-item" ui-sref="tailor.providerOrderList()" ng-class="getClass('providerOrder')">
         <i class="icon ion-social-usd-outline"></i>
         对账单
       </a>
     </div>
+
 
     <div class="tabs tabs-icon-top" ng-show="getState('other')">
       <a class="tab-item">

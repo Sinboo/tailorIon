@@ -1,0 +1,15 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header ">
+    <h1 class="title">通知客户后，更新信息</h1>
+    <button class="button button-clear button-primary" ng-click="vm.cancel()">取消</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <a class="item item-input" href="" ng-click="vm.openDatePicker()">
+        <span class="input-label">通知日:</span>
+        <input ng-model="vm.formData.receiveDate" type="datetime">
+      </a>
+      <button class="button button-full button-positive" ng-click="vm.confirm(vm.formData)">确定</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

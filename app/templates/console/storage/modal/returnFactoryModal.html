@@ -1,0 +1,49 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header ">
+    <h1 class="title">半成品或者返修意见</h1>
+    <button class="button button-clear button-primary" ng-click="vm.cancel()">取消</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.orderItem" options="vm.factories"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择快递公司">
+        <div class="option">
+          {{option.shortName}}
+        </div>
+        <span class="input-label">返回工厂:</span>
+        <input ng-model="vm.formData.orderItem.shortName" type="text" >
+      </a>
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.toFactoryExpress.company" options="vm.EXPRESS_COM"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择快递公司">
+        <div class="option">
+          {{option}}
+        </div>
+        <span class="input-label">快递公司:</span>
+        <input ng-model="vm.formData.toFactoryExpress.company" type="text" >
+      </a>
+      <label class="item item-input">
+        <span class="input-label">快递单号:</span>
+        <input ng-model="vm.formData.toFactoryExpress.number" type="number">
+      </label>
+      <a class="item item-input" href="" ng-click="vm.openDatePicker()">
+        <span class="input-label">交货日:</span>
+        <input ng-model="vm.formData.expectDeliveryDay" type="datetime">
+      </a>
+      <label class="item item-input">
+        <span class="input-label">返修意见:</span>
+        <textarea ng-model="vm.formData.placeRemark" type="text"></textarea>
+      </label>
+      <a class="item item-icon-right" href="" ng-click="vm.openFileDialog()">
+        上传附图
+        <i class="icon ion-camera"></i>
+      </a>
+      <a class="item item-image" href="" ng-show="vm.formData.image.ready" ng-click="vm.deleteImage($index)" ng-repeat="imgUrl in vm.formData.image.url track by $index">
+        <img ng-src="{{imgUrl}}" />
+      </a>
+      <button class="button button-full button-positive" ng-click="vm.confirm(vm.formData)">确定</button>
+      <form name="uploadForm" role="form" ng-show="false">
+        <input type="file" name="file" id="file" class="uploadImage" /> <br/>
+      </form>
+    </div>
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header ">
+    <h1 class="title">客户已经取衣，填写取衣信息</h1>
+    <button class="button button-clear button-primary" ng-click="vm.cancel()">取消</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.feedback" options="vm.feedbacks"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择满意度">
+        <div class="option">
+          {{option}}
+        </div>
+        <span class="input-label">满意度:</span>
+        <input ng-model="vm.formData.feedback" type="text" >
+      </a>
+      <a class="item item-input" href="" ng-click="vm.openDatePicker()">
+        <span class="input-label">取走日:</span>
+        <input ng-model="vm.formData.takeAwayDate" type="datetime">
+      </a>
+      <label class="item item-input">
+        <span class="input-label">备注:</span>
+        <textarea ng-model="vm.formData.remark" type="text"></textarea>
+      </label>
+      <button class="button button-full button-positive" ng-click="vm.confirm(vm.formData)">确定</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

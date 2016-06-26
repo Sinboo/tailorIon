@@ -1,19 +1,13 @@
-<ion-view view-title="断货" >
+<ion-view view-title="我的对账单" >
   <ion-content class="has-footer" style="margin-top: 10px">
+    <ion-refresher
+      pulling-text="下拉更新..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
     <div class="list">
-      <a class="item item-button-right" href="" modal-select="" ng-model="fabric" options="fabrics" ng-change="setFabric(fabric)"
-         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择供应商">
-        <span style="color: grey">供应商</span>
-        <div class="option">
-          {{option.shortName}}
-        </div>
-        <button class="button button-light" style="font-size: small; color: grey">
-          {{fabric.shortName}}&nbsp;
-          <i class="icon ion-ios-arrow-right"></i>
-        </button>
-      </a>
       <div class="itemRow" style="margin: 10px;color: grey">
-        以下是所有断货的产品，请留意，请从面料本中划掉.
+        你有{{itemNum}}个对账单需要对账并支付.
       </div>
     </div>
     <div class="list card" style="text-align: center">
@@ -23,35 +17,38 @@
             序号
           </div>
           <div class="col ">
-            货号
+            结算周期
           </div>
           <div class="col ">
-            色号
+            供应商
           </div>
           <div class="col ">
-            料册
+            金额
           </div>
-          <div class="col col-33">
-            状态
+          <div class="col col-30">
+
           </div>
         </div>
 
-        <div class="itemRow">
+        <div class="itemRow" style="vertical-align:middle">
           <div class="row" style="margin-bottom: 2px; font-size: smaller" ng-repeat="item in items">
             <div class="col ">
               {{$index+1}}
             </div>
             <div class="col ">
-              {{item.productNumber}}
+              {{item.createTime | date: 'yyyy-MM'}}
             </div>
             <div class="col ">
-              {{item.color}}
+              {{item.shopName}}
             </div>
             <div class="col ">
-              {{item.book}}
+              {{item.amount}}
             </div>
-            <div class="col col-33 assertive">
-              断货,已注销
+            <div class="col col-30">
+              <a href="" class="positive" style="font-size: xx-small;border: 1px solid #8f8f8f; text-decoration: none;" ng-click="sendPayment(item)">
+                付款凭证
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>

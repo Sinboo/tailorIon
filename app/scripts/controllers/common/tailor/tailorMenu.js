@@ -20,10 +20,13 @@ angular.module('tailorIon.controllers')
           return true;
         case 'tailor.buyFabric':
           return true;
+        case 'tailor.quickQueryResult':
+          return true;
+        case 'tailor.providerOrderList':
+          return true;
         default:
           return false;
       }
     }
-    
-    
+
   });

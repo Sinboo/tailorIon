@@ -1,0 +1,80 @@
+<style>
+  button {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    z-index: 9999999;
+  }
+</style>
+<ion-view  view-title="出入库-已通知" >
+  <ion-content class="has-footer">
+    <ion-refresher
+            pulling-text="下拉更新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="list card" ng-repeat="order in orders">
+      <div class="item  item-button-right">
+        <span class="positive">{{order.orderItem.clothingTypes=='OTHER'?order.orderItem.otherClothes:tailoringTypes[order.orderItem.clothingTypes.toString()]}}/{{order.orderItem.factoryName}}</span>
+        <div class="buttons">
+          <a class="button button-stable" style="font-size: small" ng-click="returnFactory(order.number)">
+            返厂&nbsp;<i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <a class="button button-positive" style="font-size: small" ng-click="takeProduct(order.number)">
+            取衣&nbsp;<i class="icon ion-ios-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="item">
+        <div class="itemRow">
+          <div class="row">
+            <div class="col colGrey col-25" >
+              订单号:
+            </div>
+            <div class="col col-75">
+              {{order.number}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col colGrey ">
+              订单产品:
+            </div>
+            <div class="col ">
+              {{order.orderItem.clothingTypes.toString()}}
+            </div>
+            <div class="col colGrey ">
+              顾客:
+            </div>
+            <div class="col ">
+              {{order.orderItem.customerName}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col colGrey " >
+              入库日:
+            </div>
+            <div class="col " style="font-size: small">
+              {{order.receiveDay == null ? "—" : covertDate(order.receiveDay)}}
+            </div>
+            <div class="col colGrey " >
+              通知日:
+            </div>
+            <div class="col " style="font-size: small">
+              {{order.notifyDay == null ? "—" : covertDate(order.notifyDay)}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable"
+                         immediate-check="false"
+                         on-infinite="loadMore()"
+                         distance="1%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
+  </div>
+</ion-view>

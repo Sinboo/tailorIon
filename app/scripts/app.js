@@ -86,18 +86,18 @@ angular
     var datePickerObj = {
       inputDate: new Date(),
       setLabel: '确定',
-      todayLabel: '今天',
-      closeLabel: '关闭',
+      todayLabel: "今天",
+      closeLabel: "取消",
       mondayFirst: false,
       weeksList: ["日", "一", "二", "三", "四", "五", "六"],
       monthsList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
       templateType: 'popup',
       from: new Date(2012, 8, 1),
       to: new Date(2018, 8, 1),
-      showTodayButton: true,
+      showTodayButton: false,
       dateFormat: 'yyyy MM dd',
-      closeOnSelect: false,
-      disableWeekdays: [0]
+      closeOnSelect: true,
+      disableWeekdays: []
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
@@ -172,7 +172,7 @@ angular
       url: '/buyFabric/:supplierName?supplierNumber?factoryName?clothingType?factoryNum?expressFeeStatus?remark?orderNumber?expressFee?fabricFee?totalPrice4CNY?totalPrice',
       views: {
         'console-purchase-toBuy': {
-          templateUrl: 'templates/console/purchase/buyFabric.html',
+          templateUrl: 'templates/console/purchase/detailPage/buyFabric.html',
           controller: 'BuyFabricCtrl'
         }
       },
@@ -220,8 +220,35 @@ angular
         }
       }
     })
-    
-    
+
+    .state('tailor.consoleStorageToAdd', {
+      url: '/consoleStorageToAdd',
+      views: {
+        'console-storage-toAdd': {
+          templateUrl: 'templates/console/storage/storageToAdd.html',
+          controller: 'StorageToAddCtrl'
+        }
+      }
+    })
+    .state('tailor.consoleStorageNotNotified', {
+      url: '/consoleStorageNotNotified',
+      views: {
+        'console-storage-notNotified': {
+          templateUrl: 'templates/console/storage/storageNotNotified.html',
+          controller: 'StorageNotNotifiedCtrl'
+        }
+      }
+    })
+    .state('tailor.consoleStorageNotified', {
+      url: '/consoleStorageNotified',
+      views: {
+        'console-storage-notified': {
+          templateUrl: 'templates/console/storage/storageNotified.html',
+          controller: 'StorageNotifiedCtrl'
+        }
+      }
+    })
+
     
     .state('tailor.providerStockQuickQuery', {
       url: '/providerStockQuickQuery',
@@ -231,6 +258,16 @@ angular
           controller: 'StockQuickQueryCtrl'
         }
       }
+    })
+    .state('tailor.quickQueryResult', {
+      url: '/quickQueryResult',
+      views: {
+        'provider-stock-quickQuery': {
+          templateUrl: 'templates/provider/stock/detailPage/quickQueryResult.html',
+          controller: 'QuickQueryResultCtrl'
+        }
+      },
+      params: {itemList: null}
     })
     .state('tailor.providerStockManage', {
       url: '/providerStockManage',
@@ -251,36 +288,19 @@ angular
       }
     })
 
+    .state('tailor.providerOrderList', {
+      url: '/providerOrderList',
+      views: {
+        'provider-order-list': {
+          templateUrl: 'templates/provider/order/orderList.html',
+          controller: 'OrderListCtrl'
+        }
+      }
+    })
 
-  // .state('tailor.provider', {
-  //   url: '^/1/provider',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/provider/providerNav.html',
-  //       controller: 'ProviderNavCtrl'
-  //     }
-  //   }
-  // })
-  // .state('tailor.provider.stock', {
-  //   url: '/quickQuery',
-  //   templateUrl: 'templates/provider/quickQuery.html',
-  //   controller: 'QuickQueryCtrl'
-  // })
-  //
-  // .state('tailor.other', {
-  //   url: '^/1/other',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/other/otherNav.html',
-  //       controller: 'OtherNavCtrl'
-  //     }
-  //   }
-  // })
-  // .state('tailor.other.feedback', {
-  //   url: '/feedback',
-  //   templateUrl: 'templates/other/feedback.html',
-  //   controller: 'FeedbackCtrl'
-  // })
+
+
+
 
   .state('error', {
     url: '^/err',
