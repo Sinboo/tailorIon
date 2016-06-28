@@ -6,9 +6,10 @@
 angular.module('tailorIon.controllers')
 	.controller('MyExchangeRateCtrl', function ($scope, providerService, $http, $state, toaster) {
 		$scope.modalData = {};
-
-		providerService.nowExchangeRate().then(function (data) {
-			$scope.modalData.nowExchangeRate = data.data;
+		$scope.$on("$ionicView.enter", function(event, data){
+			providerService.nowExchangeRate().then(function (data) {
+				$scope.modalData.nowExchangeRate = data.data;
+			});
 		});
 
 		$scope.confirm = function () {
@@ -17,7 +18,8 @@ angular.module('tailorIon.controllers')
 			providerService.newExchangeRate(queryParams).then(function (data) {
 				if (data.success == true) {
 					toaster.pop('success', '汇率修改成功!');
-					window.location.reload();
+					$scope.modalData.nowExchangeRate = $scope.modalData.newExchangeRate;
+					$scope.modalData.newExchangeRate = 0;
 				}
 				else {
 					toaster.pop('error', data.error.message);

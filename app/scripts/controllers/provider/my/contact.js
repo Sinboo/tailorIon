@@ -6,11 +6,12 @@
 angular.module('tailorIon.controllers')
 	.controller('MyContactCtrl', function ($scope, providerService, commonService, $http, $state, toaster) {
 		$scope.formData = {};
-
-		providerService.nowContact().then(function (data) {
-			$scope.formData.nowPerson = data.data.person;
-			$scope.formData.nowPhone = data.data.phone;
-			console.log($scope.formData)
+		$scope.$on("$ionicView.enter", function(event, data){
+			providerService.nowContact().then(function (data) {
+				$scope.formData.nowPerson = data.data.person;
+				$scope.formData.nowPhone = data.data.phone;
+				console.log($scope.formData)
+			});
 		});
 
 		$scope.confirm = function () {
@@ -20,7 +21,10 @@ angular.module('tailorIon.controllers')
 			providerService.newContact(queryParams).then(function (data) {
 				if (data.success == true) {
 					toaster.pop('success', '联系人修改成功!');
-					window.location.reload();
+					$scope.formData.nowPerson = $scope.formData.newPerson;
+					$scope.formData.nowPhone = $scope.formData.newPhone;
+					$scope.formData.newPerson = "";
+					$scope.formData.newPhone = "";
 				}
 				else {
 					toaster.pop('error', data.error.message);

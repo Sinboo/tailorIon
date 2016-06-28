@@ -14,12 +14,27 @@ angular.module('tailorIon.controllers')
     providerService.newApplyCount().then(function (data) {
       $scope.newApplyCount = data.data.newApply;
     });
+
     providerService.newApplies().then(function (data) {
       $scope.applies = data.data;
+    }).finally(function() {
+      $scope.$broadcast('scroll.refreshComplete');
     });
     
     $scope.APPLY_STATUS = APPLY_STATUS;
 
     $scope.SHOP_TYPE = SHOP_TYPE;
+
+    $scope.doRefresh = function () {
+      providerService.newApplyCount().then(function (data) {
+        $scope.newApplyCount = data.data.newApply;
+      });
+
+      providerService.newApplies().then(function (data) {
+        $scope.applies = data.data;
+      }).finally(function() {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
 
   });

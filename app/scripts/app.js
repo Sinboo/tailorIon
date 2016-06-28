@@ -347,7 +347,6 @@ angular
 
     .state('provider.myExchangeRate', {
       url: '/myExchangeRate',
-      cache: false,
       views: {
         'provider-my-position': {
           templateUrl: 'templates/provider/my/exchangeRate.html',
@@ -357,7 +356,6 @@ angular
     })
     .state('provider.myContact', {
       url: '/myContact',
-      cache: false,
       views: {
         'provider-my-contact': {
           templateUrl: 'templates/provider/my/contact.html',
