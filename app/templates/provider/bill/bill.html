@@ -1,0 +1,75 @@
+<ion-view view-title="{{title}}" >
+  <ion-content class="has-footer">
+    <ion-refresher
+      pulling-text="下拉更新..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="list card" >
+      <div class="item item-stable">
+        {{title}}订单数量
+        <span class="item-note">
+          {{totalElements}}
+        </span>
+      </div>
+    </div>
+
+    <div class="card" ng-repeat="order in orders" ng-click="orderDetail(order)">
+        <div class="item">
+          定制伙伴:&nbsp;&nbsp;<span class="positive">{{order.shopName}}</span>
+            <span class="item-note">
+              点击查看详情
+              <i class="icon ion-ios-arrow-right"></i>
+            </span>
+        </div>
+        <div class="item">
+          <div class="itemRow">
+            <div class="row">
+              <div class="col col-25" style="color: grey">
+                区域
+              </div>
+              <div class="col ">
+                {{order.shopAtProvince + order.shopAtCity}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-25 colGrey">
+                结算周期
+              </div>
+              <div class="col ">
+                {{BILL_CYCLE[order.cycle]}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-25" style="color: grey">
+                账单金额
+              </div>
+              <div class="col ">
+                {{order.amount}}元
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-25" style="color: grey">
+                账单发送
+              </div>
+              <div class="col ">
+                {{order.createTime | date: 'yyyy-MM-dd HH:mm'}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="(order.status==='PAYED' || order.status==='SQUAREDUP') && order.voucherUrl !== 'undefined'">
+          <div style="margin: 10px;color: grey">
+            <span>付款凭证: </span>
+          </div>
+            <a class="item item-image" href=""  >
+              <img ng-src="{{order.voucherUrl}}" />
+            </a>
+        </div>
+    </div>
+
+  </ion-content>
+  <div class="bar bar-footer">
+      <div class="title"></div>
+  </div>
+</ion-view>

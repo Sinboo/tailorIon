@@ -139,6 +139,10 @@ angular.module('tailorIon')
       set_expressFee: {
         url: 'order/{NUMBER}/expressFee',
         method: 'PUT'
+      },
+      bill_detail: {
+        url: 'bill/{NUMBER}/detail',
+        method: 'GET'
       }
 
     };
@@ -247,6 +251,9 @@ angular.module('tailorIon')
     this.newContact = function (queryParams) {
       return httpService.http({}, providerUrl.new_contact, queryParams)
     };
+    this.billDetail = function (number) {
+      return httpService.http({}, providerUrl.bill_detail, {NUMBER: number})
+    }
 
 
   });

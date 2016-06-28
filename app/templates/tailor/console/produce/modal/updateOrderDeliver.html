@@ -1,0 +1,31 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header ">
+    <h1 class="title">填写工厂发货信息</h1>
+    <button class="button button-clear button-primary" ng-click="vm.cancel()">取消</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.company" options="vm.EXPRESS_COM"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择快递公司">
+        <div class="option">
+          {{option}}
+        </div>
+        <span class="input-label">快递公司:</span>
+        <p>{{vm.formData.company}}</p>
+      </a>
+      <label class="item item-input">
+        <span class="input-label">快递单号:</span>
+        <input ng-model="vm.formData.expressNumber" type="number">
+      </label>
+      <a class="item item-input" href="" ng-click="vm.openDatePicker()">
+        <span class="input-label">实际交货日:</span>
+        <p>{{vm.formData.deliveryDate}}</p>
+      </a>
+      <label class="item item-input">
+        <span class="input-label">备注:</span>
+        <textarea ng-model="vm.formData.remark" type="text"></textarea>
+      </label>
+      <button class="button button-full button-positive" ng-click="vm.confirm(vm.formData)">确定</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

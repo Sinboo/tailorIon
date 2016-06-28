@@ -5,7 +5,11 @@
 'use strict';
 
 angular.module('tailorIon.controllers')
-  .controller('LoginCtrl', function($scope, $state, $http, localStorageService, toaster) {
+  .controller('LoginCtrl', function($scope, $state, $stateParams, $http, localStorageService, toaster) {
+    // if ($stateParams.logout == true) {
+    //   window.location.reload();
+    // }
+
     $scope.formData = {};
 
     $scope.login = function (loginData) {
@@ -34,7 +38,7 @@ angular.module('tailorIon.controllers')
             $state.go("tailor.consoleOrderDoing");
           }
           if (localStorageService.cookie.get('user').merchantType == 'FABRIC') {
-            // $state.go("tailor.consoleOrderDoing");
+            $state.go("provider.orderFreight");
           }
         }
       });

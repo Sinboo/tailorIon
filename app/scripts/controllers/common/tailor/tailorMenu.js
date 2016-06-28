@@ -35,7 +35,7 @@ angular.module('tailorIon.controllers')
 
     $scope.logout = function () {
       localStorageService.cookie.set('user', {anonymous: true});
-      $state.go('login', {}, {reload: true});
+      $state.go('login', {reload: true});
     }
 
   });

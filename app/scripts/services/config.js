@@ -116,6 +116,11 @@ void function () {
         ADVANCE : '预付款',
         MONTH: '月结'
       },
+      BILL_CYCLE: {
+        MONTH: '月账单',
+        FIRST_HALF_MONTH: '上半月账单',
+        SECOND_HALF_MONTH: '下半月账单'
+      },
       ORIGIN_PLACE: [
         '意大利',
         '英国',

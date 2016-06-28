@@ -1,0 +1,145 @@
+<ion-view cache-view="false" view-title="账单详情" >
+  <ion-content>
+    <div style="margin: 10px;color: grey">
+      <span class="">定制伙伴: {{bill.shopName + bill.month + '月' + BILL_CYCLE[bill.cycle]}}明细如下:</span>
+    </div>
+    <div class="list">
+      <div class="item" >
+        <div style="background-color: #f5f5f5; margin-bottom: 10px" ng-repeat="item in items" >
+          <div class="row">
+            <div class="col" style="color: grey">
+              姓名:
+            </div>
+            <div class="col ">
+              {{item.items[0].orderItem.customerName}}
+            </div>
+            <div class="col" style="color: grey">
+              发货日期:
+            </div>
+            <div class="col ">
+              {{item.express.createTime | date: 'yyyy.MM.dd'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" style="color: grey">
+              货号:
+            </div>
+            <div class="col ">
+              {{item.items[0].productNumber}}
+            </div>
+            <div class="col " style="color: grey">
+              色号:
+            </div>
+            <div class="col ">
+              {{item.items[0].color}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" style="color: grey">
+              数量({{FABRIC_UNIT[item.items[0].unit]}}):
+            </div>
+            <div class="col ">
+              {{item.items[0].unit == 'METER' ? item.items[0].quantity : item.items[0].quantity4yard}}
+            </div>
+            <div class="col" style="color: grey">
+              单价:
+            </div>
+            <div class="col ">
+              {{item.items[0].unitPrice}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" style="color: grey">
+              运费:
+            </div>
+            <div class="col ">
+              {{item.expressFee}}
+            </div>
+            <div class="col" style="color: grey">
+              金额:
+            </div>
+            <div class="col ">
+              {{item.totalPrice}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="list card" style="text-align: center; font-size: xx-small">-->
+      <!--<div class="item" >-->
+        <!--<div class="row">-->
+          <!--<div class="col">-->
+            <!--姓名-->
+          <!--</div>-->
+          <!--<div class="col col-20">-->
+            <!--发货日期-->
+          <!--</div>-->
+          <!--<div class="col col-20">-->
+            <!--货号-->
+          <!--</div>-->
+          <!--<div class="col col-20">-->
+            <!--色号-->
+          <!--</div>-->
+          <!--<div class="col ">-->
+            <!--数量({{FABRIC_UNIT[items[0].unit]}})-->
+          <!--</div>-->
+          <!--<div class="col ">-->
+            <!--单价-->
+          <!--</div>-->
+          <!--<div class="col ">-->
+            <!--金额-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="itemRow">-->
+          <!--<div class="row" style="margin-bottom: 2px; font-size: xx-small" ng-repeat="item in items">-->
+            <!--<div class="col ">-->
+              <!--{{item.items[0].orderItem.customerName}}-->
+            <!--</div>-->
+            <!--<div class="col col-20">-->
+              <!--{{item.express.createTime | date: 'yy.MM.dd'}}-->
+            <!--</div>-->
+            <!--<div class="col col-20">-->
+              <!--{{item.items[0].productNumber}}-->
+            <!--</div>-->
+            <!--<div class="col col-20">-->
+              <!--{{item.items[0].color}}-->
+            <!--</div>-->
+            <!--<div class="col ">-->
+              <!--{{item.items[0].unit == 'METER' ? item.items[0].quantity : item.items[0].quantity4yard}}-->
+            <!--</div>-->
+            <!--<div class="col assertive">-->
+              <!--{{item.items[0].unitPrice}}-->
+            <!--</div>-->
+            <!--<div class="col assertive">-->
+              <!--{{item.totalPrice}}-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="padding" ng-if="STATUS == 'DELIVERED'">
+      <button class="button button-block button-positive" ng-disabled="true" >
+        待对方付款
+      </button>
+    </div>
+    <div class="padding" ng-if="STATUS == 'SQUAREDUP'">
+      <button class="button button-block button-positive" ng-disabled="true" >
+        已收款
+      </button>
+    </div>
+
+    <div class="padding" ng-if="STATUS == 'PAYED'">
+      <button class="button button-block button-positive" ng-click="confirmBill(bill.number)">
+        确认收款
+      </button>
+    </div>
+    <div class="padding" ng-if="STATUS == 'INIT'">
+      <button class="button button-block button-positive" ng-click="deliverBill(bill.number)">
+        确认无误,发送
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

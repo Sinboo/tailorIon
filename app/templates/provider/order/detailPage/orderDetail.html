@@ -1,0 +1,153 @@
+<ion-view cache-view="false" view-title="订单详情" >
+  <ion-content>
+    <div style="margin: 10px;color: grey">
+      <span class="positive">定制伙伴: {{shopName}}</span>
+    </div>
+    <div class="list card" style="text-align: center">
+      <div class="item" >
+        <div class="row">
+          <div class="col">
+            姓名
+          </div>
+          <div class="col ">
+            面料品牌
+          </div>
+          <div class="col ">
+            面料号
+          </div>
+          <div class="col ">
+            数量({{FABRIC_UNIT[orders[0].unit]}})
+          </div>
+          <div class="col ">
+            单价
+          </div>
+        </div>
+
+        <div class="itemRow">
+          <div class="row" style="margin-bottom: 2px; font-size: smaller" ng-repeat="order in orders">
+            <div class="col ">
+              {{order.orderItem.customerName}}
+            </div>
+            <div class="col ">
+              {{order.brand.name}}
+            </div>
+            <div class="col ">
+              {{order.productNumber}}
+            </div>
+            <div class="col ">
+              {{order.unit == 'METER' ? order.quantity : order.quantity4yard}}
+            </div>
+            <div class="col assertive">
+              {{order.unitPrice}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="STATUS !== 'PLACED'">
+      <div style="margin: 10px;color: grey">
+        订单金额:
+      </div>
+      <div class="card">
+        <label class="item item-input">
+          <span class="input-label">面料款</span>
+          <p>{{CURRENCY[currency]}}&nbsp;&nbsp;{{fabricFee}}</p>
+        </label>
+        <label class="item item-input" ng-if="hasExpressFeeProcess">
+          <span class="input-label">运费</span>
+          <input type="number" ng-model="expressFee" ng-disabled="STATUS !=='PLACED'" ng-change="setExpressFee(expressFee)" >
+        </label>
+        <label class="item item-input" ng-if="currency !== 'CNY'">
+          <span class="input-label">合计{{CURRENCY[currency]}}</span>
+          <p>{{truncateDecimals(totalPrice, 2)}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">合计人民币</span>
+          <p>{{currency !== 'CNY' ? truncateDecimals(totalPrice4CNY, 2) : truncateDecimals(totalPrice, 2)}}</p>
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <div style="margin: 10px;color: grey">
+        发货地址:
+      </div>
+      <div class="card">
+        <label class="item item-input">
+          <span class="input-label">单位名称</span>
+          <p>{{orderInfo.factoryName}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">收件人</span>
+          <p>{{orderInfo.factoryContact}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">联系电话</span>
+          <p>{{orderInfo.factoryPhone}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">联系地址</span>
+          <p>{{orderInfo.factoryAddress}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label assertive">备注</span>
+          <p class="assertive">{{remark}}</p>
+        </label>
+      </div>
+    </div>
+
+    <div ng-if="STATUS == 'PLACED'">
+      <div style="margin: 10px;color: grey">
+        运费设置:
+      </div>
+      <div class="card">
+        <label class="item item-input">
+          <span class="input-label">面料款</span>
+          <p>{{CURRENCY[currency]}}&nbsp;&nbsp;{{fabricFee}}</p>
+        </label>
+        <label class="item item-input" ng-if="hasExpressFeeProcess">
+          <span class="input-label">运费</span>
+          <input type="number" ng-model="expressFee" ng-disabled="STATUS !=='PLACED'" ng-change="setExpressFee(expressFee)" >
+        </label>
+        <label class="item item-input" ng-if="currency == 'HKD'">
+          <span class="input-label">合计港元</span>
+          <p>{{truncateDecimals(totalPrice, 2)}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">合计人民币</span>
+          <p>{{truncateDecimals(currency == 'HKD' ? totalPrice4CNY : totalPrice, 2)}}</p>
+        </label>
+      </div>
+    </div>
+
+
+
+    <div ng-if="(STATUS==='PAYED' || STATUS==='DELIVERED' || STATUS==='SUCCESS') && settlementType == 'CASH'">
+      <div style="margin: 10px;color: grey">
+        <span>付款凭证: </span>
+      </div>
+      <div class="card">
+        <a class="item item-image" href=""  >
+          <img ng-src="{{images[0].thumbUrl}}" />
+        </a>
+        <div class="item">
+        <span style="font-size:xx-small;color: grey">
+          请先核实款项到账后再发货,尤其是业务交往少的客户</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="padding" ng-if="STATUS==='PLACED'">
+      <button class="button button-block button-positive" ng-click="sendExpressFee()">
+        确认运费
+      </button>
+    </div>
+    <div class="padding" ng-if="STATUS==='PAYED'">
+      <button class="button button-block button-positive" ng-click="send()">
+        发货
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

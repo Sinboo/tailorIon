@@ -1,0 +1,76 @@
+<ion-view view-title="供应商详情" >
+  <ion-content>
+    <div>
+      <div style="margin: 10px;color: grey">
+        商户详情:
+      </div>
+      <div class="card">
+        <label class="item item-input">
+          <span class="input-label">品牌名</span>
+          <p>{{apply.shortName}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">公司名称</span>
+          <p>{{apply.fullName}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">类型</span>
+          <p>{{SHOP_TYPE[apply.shopType]}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">区域</span>
+          <p>{{apply.province}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">地址</span>
+          <p class="">{{apply.address}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">定制服装类型</span>
+          <p class="">{{}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">联系人</span>
+          <p class="">{{apply.contact}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">联系电话</span>
+          <p class="">{{apply.phone}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">联系邮箱</span>
+          <p class="">{{apply.email}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">QQ</span>
+          <p class="">{{apply.qq}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">网站</span>
+          <p class="">{{apply.website}}</p>
+        </label>
+        <label class="item item-input">
+          <span class="input-label ">定位客户群</span>
+          <p class="">{{apply.clientBase}}</p>
+        </label>
+      </div>
+    </div>
+
+    <div ng-if="!passFlag">
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="refuse(applyNumber)">
+          拒绝
+        </button>
+      </div>
+      <div class="padding" >
+        <button class="button button-block button-positive" ng-click="accept(applyNumber)">
+          通过
+        </button>
+      </div>
+    </div>
+
+
+
+
+  </ion-content>
+</ion-view>

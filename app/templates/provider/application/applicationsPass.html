@@ -1,0 +1,47 @@
+<ion-view view-title="{{title}}" >
+  <ion-content class="has-footer">
+    <ion-refresher
+      pulling-text="下拉更新..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <div style="margin: 10px;color: grey">
+      <span>你有{{totalNumber}}个合作关系</span>
+    </div>
+
+    <div class="card">
+      <a class="item item-thumbnail-left" href="" ng-repeat="apply in applies" ui-sref="provider.applicationPassDetail({apply: apply})">
+        <img ng-src="{{apply.portrait}}">
+        <div class="row">
+          <div class="col col-20" style="color: grey">
+            品牌
+          </div>
+          <div class="col">
+            {{apply.shortName}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20" style="color: grey">
+            区域
+          </div>
+          <div class="col">
+            {{apply.province}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20" style="color: grey">
+            状态
+          </div>
+          <div class="col ">
+            <span class="positive"> {{APPLY_STATUS[apply.status]}}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
+
+  </ion-content>
+  <div class="bar bar-footer">
+      <div class="title"></div>
+  </div>
+</ion-view>

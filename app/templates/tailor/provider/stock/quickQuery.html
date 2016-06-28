@@ -1,0 +1,28 @@
+<ion-view view-title="快速查询" >
+  <ion-content class="has-footer">
+    <div class="list card">
+      <a class="item item-input" href="" modal-select="" ng-model="formData.fabric" options="fabrics"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择供应商">
+        <div class="option">
+          {{option.shortName}}
+        </div>
+        <span class="input-label">供应商:</span>
+        <p>{{formData.fabric.shortName}}</p>
+      </a>
+      <label class="item item-input">
+        <span class="input-label">货号:</span>
+        <input ng-model="formData.productNumber" type="number">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">色号:</span>
+        <input ng-model="formData.color" placeholder="可不填" type="number">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-full button-positive" ng-click="queryFabric(formData)">提交</button>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
+  </div>
+</ion-view>

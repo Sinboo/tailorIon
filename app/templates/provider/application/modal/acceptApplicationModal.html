@@ -1,0 +1,35 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header ">
+    <h1 class="title">请设置该店与你的结算方式</h1>
+    <button class="button button-clear button-primary" ng-click="vm.cancel()">取消</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.pricingPackageNumber" options="vm.priceSystems"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择">
+        <div class="option">
+          {{option.name}}
+        </div>
+        <span class="input-label">选择结算价格:</span>
+        <p>{{vm.formData.pricingPackageNumber.name}}</p>
+      </a>
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.settlementType" options="vm.businesses"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择">
+        <div class="option">
+          {{option.fullName}}
+        </div>
+        <span class="input-label">选择结算方式:</span>
+        <p>{{vm.formData.settlementType.fullName}}</p>
+      </a>
+      <a class="item item-input" href="" modal-select="" ng-model="vm.formData.hasExpressProcess" options="vm.ExpressProcesses"
+         cancel-button="取消" reset-button="重置" load-list-message="加载中..." modal-title="请选择">
+        <div class="option">
+          {{option.fullName}}
+        </div>
+        <span class="input-label">订单运费:</span>
+        <p>{{vm.formData.hasExpressProcess.fullName}}</p>
+      </a>
+      <button class="button button-full button-positive" ng-click="vm.validate() && vm.confirm(vm.formData)">确定</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

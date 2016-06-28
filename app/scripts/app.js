@@ -75,11 +75,17 @@ angular
       $ionicLoading.show({
         template: '<ion-spinner></ion-spinner>'
       });
-
-
     });
 
-  loginService.initUser()
+  loginService.initUser();
+
+  $rootScope.$on('loading:show', function() {
+    $ionicLoading.show({template: '加载中...'})
+  });
+
+  $rootScope.$on('loading:hide', function() {
+    $ionicLoading.hide()
+  });
 
 })
   .config(function (ionicDatePickerProvider) {
@@ -107,6 +113,18 @@ angular
 
     $httpProvider.interceptors.push('myHttpInterceptor');
     $httpProvider.interceptors.push('myHttpHeader');
+    $httpProvider.interceptors.push(function($rootScope) {
+      return {
+        request: function(config) {
+          $rootScope.$broadcast('loading:show');
+          return config
+        },
+        response: function(response) {
+          $rootScope.$broadcast('loading:hide');
+          return response
+        }
+      }
+    })
   })
   .config(['upyunProvider',function(upyunProvider) {
     upyunProvider.config({
@@ -117,6 +135,218 @@ angular
   
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    .state('provider', {
+      url: '/2',
+      abstract: true,
+      templateUrl: 'templates/common/provider/providerMenu.html',
+      controller: 'ProviderMenuCtrl',
+      resolve: {
+        security:function($q, localStorageService) {
+          if(localStorageService.cookie.get('user').merchantType !== 'FABRIC'){
+            return $q.reject("Not Authorized");
+          }
+        }
+      }
+    })
+    .state('provider.orderFreight', {
+      url: '/orderFreight',
+      views: {
+        'provider-order-freight': {
+          templateUrl: 'templates/provider/order/order.html',
+          controller: 'OrderCtrl'
+        }
+      }
+    })
+    .state('provider.orderFreightDetail', {
+      url: '/orderFreightDetail',
+      cache: false,
+      views: {
+        'provider-order-freight': {
+          templateUrl: 'templates/provider/order/detailPage/orderDetail.html',
+          controller: 'OrderDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.orderNotSend', {
+      url: '/orderNotSend',
+      views: {
+        'provider-order-notSend': {
+          templateUrl: 'templates/provider/order/order.html',
+          controller: 'OrderCtrl'
+        }
+      }
+    })
+    .state('provider.orderNotSendDetail', {
+      url: '/orderNotSendDetail',
+      cache: false,
+      views: {
+        'provider-order-notSend': {
+          templateUrl: 'templates/provider/order/detailPage/orderDetail.html',
+          controller: 'OrderDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.orderSend', {
+      url: '/orderSend',
+      views: {
+        'provider-order-send': {
+          templateUrl: 'templates/provider/order/order.html',
+          controller: 'OrderCtrl'
+        }
+      }
+    })
+    .state('provider.orderSendDetail', {
+      url: '/orderSendDetail',
+      cache: false,
+      views: {
+        'provider-order-send': {
+          templateUrl: 'templates/provider/order/detailPage/orderDetail.html',
+          controller: 'OrderDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.orderSuccess', {
+      url: '/orderSuccess',
+      views: {
+        'provider-order-success': {
+          templateUrl: 'templates/provider/order/order.html',
+          controller: 'OrderCtrl'
+        }
+      }
+    })
+    .state('provider.orderSuccessDetail', {
+      url: '/orderSuccessDetail',
+      cache: false,
+      views: {
+        'provider-order-success': {
+          templateUrl: 'templates/provider/order/detailPage/orderDetail.html',
+          controller: 'OrderDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+
+    .state('provider.applicationNotPass', {
+      url: '/applicationNotPass',
+      views: {
+        'provider-application-notPass': {
+          templateUrl: 'templates/provider/application/applicationsNotPass.html',
+          controller: 'ApplicationsNotPassCtrl'
+        }
+      }
+    })
+    .state('provider.applicationNotPassDetail', {
+      url: '/applicationNotPassDetail',
+      views: {
+        'provider-application-notPass': {
+          templateUrl: 'templates/provider/application/detailPage/applicationDetail.html',
+          controller: 'ApplicationNotPassDetailCtrl'
+        }
+      },
+      params: {apply: null}
+    })
+    .state('provider.applicationPass', {
+      url: '/applicationPass',
+      views: {
+        'provider-application-pass': {
+          templateUrl: 'templates/provider/application/applicationsPass.html',
+          controller: 'ApplicationsPassCtrl'
+        }
+      }
+    })
+    .state('provider.applicationPassDetail', {
+      url: '/applicationPassDetail',
+      views: {
+        'provider-application-pass': {
+          templateUrl: 'templates/provider/application/detailPage/applicationDetail.html',
+          controller: 'ApplicationPassDetailCtrl'
+        }
+      },
+      params: {apply: null}
+    })
+
+    .state('provider.billINIT', {
+      url: '/billINIT',
+      views: {
+        'provider-bill-init': {
+          templateUrl: 'templates/provider/bill/bill.html',
+          controller: 'BillCtrl'
+        }
+      }
+    })
+    .state('provider.billINITDetail', {
+      url: '/billINITDetail',
+      views: {
+        'provider-bill-init': {
+          templateUrl: 'templates/provider/bill/detailPage/billDetail.html',
+          controller: 'BillDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.billDELIVERED', {
+      url: '/billDELIVERED',
+      views: {
+        'provider-bill-delivered': {
+          templateUrl: 'templates/provider/bill/bill.html',
+          controller: 'BillCtrl'
+        }
+      }
+    })
+    .state('provider.billDELIVEREDDetail', {
+      url: '/billDELIVEREDDetail',
+      views: {
+        'provider-bill-delivered': {
+          templateUrl: 'templates/provider/bill/detailPage/billDetail.html',
+          controller: 'BillDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.billPAYED', {
+      url: '/billPAYED',
+      views: {
+        'provider-bill-payed': {
+          templateUrl: 'templates/provider/bill/bill.html',
+          controller: 'BillCtrl'
+        }
+      }
+    })
+    .state('provider.billPAYEDDetail', {
+      url: '/billPAYEDDetail',
+      views: {
+        'provider-bill-payed': {
+          templateUrl: 'templates/provider/bill/detailPage/billDetail.html',
+          controller: 'BillDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+    .state('provider.billSQUAREDUP', {
+      url: '/billSQUAREDUP',
+      views: {
+        'provider-bill-squaredup': {
+          templateUrl: 'templates/provider/bill/bill.html',
+          controller: 'BillCtrl'
+        }
+      }
+    })
+    .state('provider.billSQUAREDUPDetail', {
+      url: '/billSQUAREDUPDetail',
+      views: {
+        'provider-bill-squaredup': {
+          templateUrl: 'templates/provider/bill/detailPage/billDetail.html',
+          controller: 'BillDetailCtrl'
+        }
+      },
+      params: {order: null}
+    })
+
+    
+    
     .state('tailor', {
       url: '/1',
       abstract: true,
@@ -135,7 +365,7 @@ angular
       url: '/consoleOrderDoing',
       views: {
         'console-order-doing': {
-          templateUrl: 'templates/console/order/order.html',
+          templateUrl: 'templates/tailor/console/order/order.html',
           controller: 'OrderDoingCtrl'
         }
       }
@@ -144,7 +374,7 @@ angular
       url: '/detailPage',
       views: {
         'console-order-doing': {
-          templateUrl: 'templates/console/order/detailPage.html',
+          templateUrl: 'templates/tailor/console/order/detailPage.html',
           controller: 'DetailPageCtrl'
         }
       }
@@ -153,7 +383,7 @@ angular
       url: '/consoleOrderFinish',
       views: {
         'console-order-finish': {
-          templateUrl: 'templates/console/order/order.html',
+          templateUrl: 'templates/tailor/console/order/order.html',
           controller: 'OrderFinishCtrl'
         }
       }
@@ -163,7 +393,7 @@ angular
       url: '/consolePurchaseToBuy/:fromBuyFabric',
       views: {
         'console-purchase-toBuy': {
-          templateUrl: 'templates/console/purchase/purchaseToBuy.html',
+          templateUrl: 'templates/tailor/console/purchase/purchaseToBuy.html',
           controller: 'PurchaseToBuyCtrl'
         }
       }
@@ -172,7 +402,7 @@ angular
       url: '/buyFabric/:supplierName?supplierNumber?factoryName?clothingType?factoryNum?expressFeeStatus?remark?orderNumber?expressFee?fabricFee?totalPrice4CNY?totalPrice',
       views: {
         'console-purchase-toBuy': {
-          templateUrl: 'templates/console/purchase/detailPage/buyFabric.html',
+          templateUrl: 'templates/tailor/console/purchase/detailPage/buyFabric.html',
           controller: 'BuyFabricCtrl'
         }
       },
@@ -187,7 +417,7 @@ angular
       url: '/consolePurchaseToSend',
       views: {
         'console-purchase-toSend': {
-          templateUrl: 'templates/console/purchase/purchaseToSend.html',
+          templateUrl: 'templates/tailor/console/purchase/purchaseToSend.html',
           controller: 'PurchaseToSendCtrl'
         }
       }
@@ -196,7 +426,7 @@ angular
       url: '/consolePurchaseOnTheWay',
       views: {
         'console-purchase-onWay': {
-          templateUrl: 'templates/console/purchase/purchaseOnTheWay.html',
+          templateUrl: 'templates/tailor/console/purchase/purchaseOnTheWay.html',
           controller: 'PurchaseOnTheWayCtrl'
         }
       }
@@ -206,7 +436,7 @@ angular
       url: '/consoleProduceToOrder',
       views: {
         'console-produce-toOrder': {
-          templateUrl: 'templates/console/produce/produceToOrder.html',
+          templateUrl: 'templates/tailor/console/produce/produceToOrder.html',
           controller: 'ProduceToOrderCtrl'
         }
       }
@@ -215,7 +445,7 @@ angular
       url: '/consoleProduceUnderDoing',
       views: {
         'console-produce-underDoing': {
-          templateUrl: 'templates/console/produce/produceUnderDoing.html',
+          templateUrl: 'templates/tailor/console/produce/produceUnderDoing.html',
           controller: 'ProduceUnderDoingCtrl'
         }
       }
@@ -225,7 +455,7 @@ angular
       url: '/consoleStorageToAdd',
       views: {
         'console-storage-toAdd': {
-          templateUrl: 'templates/console/storage/storageToAdd.html',
+          templateUrl: 'templates/tailor/console/storage/storageToAdd.html',
           controller: 'StorageToAddCtrl'
         }
       }
@@ -234,7 +464,7 @@ angular
       url: '/consoleStorageNotNotified',
       views: {
         'console-storage-notNotified': {
-          templateUrl: 'templates/console/storage/storageNotNotified.html',
+          templateUrl: 'templates/tailor/console/storage/storageNotNotified.html',
           controller: 'StorageNotNotifiedCtrl'
         }
       }
@@ -243,7 +473,7 @@ angular
       url: '/consoleStorageNotified',
       views: {
         'console-storage-notified': {
-          templateUrl: 'templates/console/storage/storageNotified.html',
+          templateUrl: 'templates/tailor/console/storage/storageNotified.html',
           controller: 'StorageNotifiedCtrl'
         }
       }
@@ -254,7 +484,7 @@ angular
       url: '/providerStockQuickQuery',
       views: {
         'provider-stock-quickQuery': {
-          templateUrl: 'templates/provider/stock/quickQuery.html',
+          templateUrl: 'templates/tailor/provider/stock/quickQuery.html',
           controller: 'StockQuickQueryCtrl'
         }
       }
@@ -263,7 +493,7 @@ angular
       url: '/quickQueryResult',
       views: {
         'provider-stock-quickQuery': {
-          templateUrl: 'templates/provider/stock/detailPage/quickQueryResult.html',
+          templateUrl: 'templates/tailor/provider/stock/detailPage/quickQueryResult.html',
           controller: 'QuickQueryResultCtrl'
         }
       },
@@ -273,7 +503,7 @@ angular
       url: '/providerStockManage',
       views: {
         'provider-stock-manage': {
-          templateUrl: 'templates/provider/stock/stockManage.html',
+          templateUrl: 'templates/tailor/provider/stock/stockManage.html',
           controller: 'StockManageCtrl'
         }
       }
@@ -282,7 +512,7 @@ angular
       url: '/providerStockOutStock',
       views: {
         'provider-stock-outStock': {
-          templateUrl: 'templates/provider/stock/outStock.html',
+          templateUrl: 'templates/tailor/provider/stock/outStock.html',
           controller: 'OutStockCtrl'
         }
       }
@@ -292,7 +522,7 @@ angular
       url: '/providerOrderList',
       views: {
         'provider-order-list': {
-          templateUrl: 'templates/provider/order/orderList.html',
+          templateUrl: 'templates/tailor/provider/order/orderList.html',
           controller: 'OrderListCtrl'
         }
       }
@@ -302,7 +532,7 @@ angular
       url: '/otherFeedback',
       views: {
         'other-feedback': {
-          templateUrl: 'templates/other/feedback.html',
+          templateUrl: 'templates/tailor/other/feedback.html',
           controller: 'FeedbackCtrl'
         }
       }
@@ -312,7 +542,7 @@ angular
       url: '/otherPositionManage',
       views: {
         'other-position': {
-          templateUrl: 'templates/other/positionManage.html',
+          templateUrl: 'templates/tailor/other/positionManage.html',
           controller: 'PositionManageCtrl'
         }
       }
@@ -333,6 +563,7 @@ angular
   })
   .state('login', {
     url: '^/login',
+    cache: false,
     templateUrl: 'templates/login/login.html',
     controller: 'LoginCtrl'
   })
