@@ -6,11 +6,21 @@
 angular.module('tailorIon.controllers')
 	.controller('MyExchangeRateCtrl', function ($scope, providerService, $http, $state, toaster) {
 		$scope.modalData = {};
-		$scope.$on("$ionicView.enter", function(event, data){
+		var initData = function () {
 			providerService.nowExchangeRate().then(function (data) {
 				$scope.modalData.nowExchangeRate = data.data;
+			}).finally(function() {
+				$scope.$broadcast('scroll.refreshComplete');
 			});
+		};
+		
+		$scope.$on("$ionicView.enter", function(event, data){
+			initData();
 		});
+
+		$scope.doRefresh = function () {
+			initData();
+		};
 
 		$scope.confirm = function () {
 			var queryParams = {};

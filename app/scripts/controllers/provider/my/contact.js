@@ -6,13 +6,25 @@
 angular.module('tailorIon.controllers')
 	.controller('MyContactCtrl', function ($scope, providerService, commonService, $http, $state, toaster) {
 		$scope.formData = {};
-		$scope.$on("$ionicView.enter", function(event, data){
+		
+		var initData = function () {
 			providerService.nowContact().then(function (data) {
 				$scope.formData.nowPerson = data.data.person;
 				$scope.formData.nowPhone = data.data.phone;
 				console.log($scope.formData)
+			}).finally(function() {
+				$scope.$broadcast('scroll.refreshComplete');
 			});
+		}
+		
+		$scope.$on("$ionicView.enter", function(event, data){
+			initData();
 		});
+
+		$scope.doRefresh = function () {
+			initData();
+		};
+		
 
 		$scope.confirm = function () {
 			var queryParams = {};

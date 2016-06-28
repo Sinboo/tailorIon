@@ -1,5 +1,10 @@
 <ion-view view-title="设定联系人">
   <ion-content class="has-footer">
+    <ion-refresher
+      pulling-text="下拉更新..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
     <div class="list">
       <label class="item item-input">
         <span class="input-label">联系人:</span>
