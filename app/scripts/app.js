@@ -345,6 +345,37 @@ angular
       params: {order: null}
     })
 
+    .state('provider.myExchangeRate', {
+      url: '/myExchangeRate',
+      cache: false,
+      views: {
+        'provider-my-position': {
+          templateUrl: 'templates/provider/my/exchangeRate.html',
+          controller: 'MyExchangeRateCtrl'
+        }
+      }
+    })
+    .state('provider.myContact', {
+      url: '/myContact',
+      cache: false,
+      views: {
+        'provider-my-contact': {
+          templateUrl: 'templates/provider/my/contact.html',
+          controller: 'MyContactCtrl'
+        }
+      }
+    })
+    .state('provider.myFeedback', {
+      url: '/myFeedback',
+      views: {
+        'provider-my-feedback': {
+          templateUrl: 'templates/provider/my/feedback.html',
+          controller: 'MyFeedbackCtrl'
+        }
+      }
+    })
+    
+
     
     
     .state('tailor', {

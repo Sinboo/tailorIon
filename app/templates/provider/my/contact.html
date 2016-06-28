@@ -1,0 +1,33 @@
+<ion-view view-title="设定联系人">
+  <ion-content class="has-footer">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">联系人:</span>
+        <input ng-model="formData.nowPerson" ng-disabled="true" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">联系方式:</span>
+        <input ng-model="formData.nowPhone" ng-disabled="true" type="text">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">新联系人:</span>
+        <input ng-model="formData.newPerson" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">新联系方式:</span>
+        <input ng-model="formData.newPhone" type="text">
+      </label>
+
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="validate() && confirm()">
+        确认
+      </button>
+    </div>
+
+  </ion-content>
+  <div class="bar bar-footer">
+    <div class="title"></div>
+  </div>
+</ion-view>

@@ -45,6 +45,15 @@
         <ion-nav-view name="provider-bill-squaredup"></ion-nav-view>
       </ion-tab>
 
+      <ion-tab  title="汇率设定" ui-sref="provider.myExchangeRate()" hidden="{{!getState('my')}}" >
+        <ion-nav-view name="provider-my-position"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="订单联系人设定" ui-sref="provider.myContact()" hidden="{{!getState('my')}}" >
+        <ion-nav-view name="provider-my-contact"></ion-nav-view>
+      </ion-tab>
+      <ion-tab  title="意见反馈" ui-sref="provider.myFeedback()" hidden="{{!getState('my')}}" >
+        <ion-nav-view name="provider-my-feedback"></ion-nav-view>
+      </ion-tab>
 
 
     </ion-tabs>
@@ -65,7 +74,7 @@
         <i class="icon ion-social-yen-outline"></i>
         结算
       </a>
-      <a class="tab-item"  ng-class="getClass('my')">
+      <a class="tab-item" ui-sref="provider.myContact()"  ng-class="getClass('my')">
         <i class="icon ion-ios-person-outline"></i>
         我的
       </a>
